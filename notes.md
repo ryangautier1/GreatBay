@@ -22,11 +22,12 @@
 - Seller ID
 
 ## Items in Auction
-- Item ID
+- Item ID (ID)
 - Auction ID
 - Initial Price? (or we could just do it as a first bid in the Bids Table... hm...)
 
 ## Bids
+- Bid ID (ID)
 - Bidder ID
 - Item ID
 - Price
