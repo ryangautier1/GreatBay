@@ -11,8 +11,13 @@ const actionQuestion = [{
 const postQuestions = [
     {
         type: "input",
-        message: "What is your name/username?",
-        name: "name"
+        message: "What is your first name?",
+        name: "firstname"
+    },
+    {
+        type: "input",
+        message: "What is your last name?",
+        name: "lastname"
     },
     {
         type: "input",
@@ -28,6 +33,11 @@ const postQuestions = [
         type: "number",
         message: "What would you like the starting bid to be?",
         name: "startingBid"
+    },
+    {
+        type: "number",
+        message: "What is the item quantity?",
+        name: "quantity"
     }
 ];
 
@@ -58,9 +68,10 @@ async function auction() {
                 console.log("Adding post...");
                 var query = connection.query("INSERT INTO items SET ?",
                     {
-                        name: post.item,
+                        item: post.item,
                         description: post.description,
-                        startBid: post.startingBid
+                        price: post.startingBid,
+                        quantity: post.quantity
                     }, function (err) {
                         if (err) {
                             throw err;
