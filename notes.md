@@ -24,5 +24,9 @@
 ## Items in Auction
 - Item ID
 - Auction ID
-- Starting Price
-- High Price (or list of prices)
+- Initial Price? (or we could just do it as a first bid in the Bids Table... hm...)
+
+## Bids
+- Bidder ID
+- Item ID
+- Price
