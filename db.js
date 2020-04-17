@@ -1,25 +1,54 @@
 var mysql = require("mysql");
 
-const _DB_NAME = "greatBay_db";
+const _DB_NAME = "greatBay";
 const _USERTABLE_NAME = "users";
 const _ITEMTABLE_NAME = "items";
 const _AUCTIONTABLE_NAME = "auctions";
+const _BIDTABLE_NAME = "bids";
+const _AUCTIONCONTENT_NAME = "itemsInAuction";
 
-function User(name) {
+function User(firstName, lastName = "", streetAddress1 = "", streetAddress2 = "", city = "", state = "") {
     return {
-        name: name
+        firstname: firstName,
+        lastname: lastName,
+        streetaddress1: streetAddress1,
+        streetaddress2: streetAddress2,
+        city: city,
+        state: state
     };
 };
 
-function SaleItem(name) {
+function SaleItem(item, description = "", price = 0.00, quantity = 0) {
     return {
-        name: name
+        item: item,
+        description: description,
+        price: price,
+        quantity: quantity
     };
 };
 
-function Auction(name) {
+function Auction(name, sellerID, startDate = new Date(), endDate = new Date()) {
     return {
-        name: name
+        name: name,
+        startdate: startDate,
+        enddate: endDate,
+        sellerid: sellerID
+    };
+};
+
+function Bid(bidderID, itemId, price) {
+    return {
+        bidderid: bidderID,
+        itemid: itemId, 
+        price: price
+    };
+};
+
+function AuctionItem(itemID, auctionID, startingPrice = 0.00) {
+    return {
+        itemid: itemID,
+        auctionid: auctionID,
+        startingprice: startingPrice
     };
 };
 
@@ -72,6 +101,30 @@ function createAuction(auctionName = "") {
         });
     console.log(query.sql);
 };
+
+function createBid(bidderID, itemID, price) {
+    console.log("Inserting a new bid...\n");
+    var query = connection.query(
+        "INSERT INTO " + _BIDTABLE_NAME + " SET ?",
+        new Bid(bidderID, itemID, price),
+        function(err, res) {
+            if (err) throw err;
+            console.log(res.affectedRows + " bid(s) added.\n");
+        });
+    console.log(query.sql);
+};
+
+function addItemToAuction(auctionID, itemID, startingPrice) {
+    console.log("Inserting a new item...\n");
+    var query = connection.query(
+        "INSERT INTO " + _AUCTIONCONTENT_NAME + " SET ?",
+        new AuctionItem(auctionID, itemID, startingPrice),
+        function(err, res) {
+            if (err) throw err;
+            console.log(res.affectedRows + " item(s) added.\n");
+        });
+    console.log(query.sql);
+}
 
 function updateTable(tableName, whereFieldValuePairs, setFieldValuePairs) {
     console.log("Updating " + tableName + " table...\n");
