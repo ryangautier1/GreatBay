@@ -22,7 +22,8 @@
 - Seller ID
 
 ## Items in Auction
-- Item ID (ID)
+- Listing ID (ID)
+- Item ID
 - Auction ID
 - Initial Price? (or we could just do it as a first bid in the Bids Table... hm...)
 
