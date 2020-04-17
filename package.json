@@ -1,0 +1,23 @@
+{
+  "name": "greatbay",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryangautier1/GreatBay.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryangautier1/GreatBay/issues"
+  },
+  "homepage": "https://github.com/ryangautier1/GreatBay#readme",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
+}
