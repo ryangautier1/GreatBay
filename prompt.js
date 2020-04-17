@@ -1,18 +1,28 @@
 var inquirer = require("inquirer");
 
 const actionQuestion = [{
-        type: "list",
-        message: "What would you like to do?",
-        choices: ["POST", "BID", "EXIT"],
-        name: "action"
-    }];
+    type: "list",
+    message: "What would you like to do?",
+    choices: ["POST", "BID", "EXIT"],
+    name: "action"
+}];
 
 // Define questions
 const postQuestions = [
     {
         type: "input",
+        message: "What is your name/username?",
+        name: "name"
+    },
+    {
+        type: "input",
         message: "What would you like to post?",
         name: "item"
+    },
+    {
+        type: "input",
+        message: "Please enter a description of the item:",
+        name: "description"
     },
     {
         type: "number",
@@ -45,6 +55,17 @@ async function auction() {
             if (action.action === "POST") {
                 var post = await inquirer.prompt(postQuestions);
                 // add post info to database
+                console.log("Adding post...");
+                var query = connection.query("INSERT INTO items SET ?",
+                    {
+                        name: post.item,
+                        description: post.description,
+                        startBid: post.startingBid
+                    }, function (err) {
+                        if (err) {
+                            throw err;
+                        }
+                    });
 
             }
             else if (action.action === "BID") {
@@ -52,7 +73,7 @@ async function auction() {
                 // check if bid is high enough
 
                 // update database if it is high enough
-                
+
             }
         }
     } catch (err) {
